@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width"/>
+		
+		<title>Lista de pessoas</title>
+
+		<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+	</head>
+	<body>
+		<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div id="accordion">	
+						<!-- Listar -->
+						  <div class="card">
+						    <div class="card-header" id="topoAdicionar">
+						      <h5 class="mb-0">
+						        <button class="btn btn-primary collapsed" data-toggle="collapse" data-target="#accordionAdicionar" aria-expanded="false" aria-controls="accordionAdicionar">
+						          Adicionar
+						        </button>
+						      </h5>
+						    </div>
+						    <div id="accordionAdicionar" class="collapse" aria-labelledby="topoAdicionar" data-parent="#accordion" style="">
+						    	<div class="card-body">
+						      		<div class="row">
+										<div class="col-md-12">
+											<div class="panel panel-default">
+												<div class="panel-heading">
+													<h3 class="panel-title">Adicionar</h3>	
+												</div>
+												<div class="panel-body">
+													<form method="POST" th:object="${pessoa}" th:action="@{/web/pessoas}">
+													  <div class="form-row">
+													    <div class="form-group col-md-12">
+													      <label for="nome">Nome</label>
+													      <input type="text" class="form-control" id="nome" placeholder="Nome" th:field="*{nome}" required="required" maxlength="25">
+													    </div>
+													  </div>
+													  <div class="form-row">
+											
+													    <div class="form-group col-md-12">
+													      <label for="idade">Idade</label>
+													      <input type="number" class="form-control" id="idade" placeholder="Idade" th:field="*{idade}"required="required"/>
+													    </div>
+													  </div>
+									
+													  <button type="submit" class="btn btn-primary">Salvar</button>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h2 class="h2 panel-title">Pessoas</h2>
+						</div>
+						<div class="panel-body">
+							<table class="table table-bordered table-responsive">
+								<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Nome</th>
+										<th scope="col">Idade</th>
+									</tr>
+									
+									<tr th:each="pessoa: ${pessoas}">
+										<td th:text="${pessoa.id}"/>
+										<td th:text="${pessoa.nome}"/>
+										<td th:text="${pessoa.idade}"/>
+										<td>
+											<button class="btn btn-warning" type="button" title="Inativar"> 
+												<i class="fas fa-power-off"></i>
+											</button>
+											<button class="btn btn-danger" type="button" title="Excluir"> 
+												<i class="fas fa-trash"></i>
+											</button>
+										</td>
+									</tr>
+									
+								</thead>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script th:src="@{/js/jquery.min.js}"></script>
+		<script th:src="@{/js/jquery.mask.js}"></script>
+		<script th:src="@{/js/bootstrap.min.js}"></script>
+		<script defer th:src="@{/js/fontawesome-all.min.js}"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+			  $('.phone_with_ddd').mask('(00) 00000-0000');
+			});
+		</script>
+	</body>
+	
+</html>
