@@ -32,6 +32,7 @@ public class PessoaWebController extends BaseController {
 	@PostMapping
 	public String adicionar(Pessoa pessoa) {
 		getService().inserir(pessoa);
+		System.out.println("MERDA");
 		return "redirect:" + WebUrls.PESSOA;
 	}
 	
